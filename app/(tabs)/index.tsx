@@ -1,6 +1,6 @@
 import { TextInput, StyleSheet, View, Button, Alert } from 'react-native';
 import * as SMS from 'expo-sms';
-import {Link} from 'expo-router';
+import {Link, useLocalSearchParams} from 'expo-router';
 import {useState} from 'react';
 
 export default function HomeScreen() {
@@ -16,7 +16,7 @@ export default function HomeScreen() {
     ])
   }
 
-  const id = ['0123456789', '9876543210'];
+  const {id} = useLocalSearchParams<{id: ['0123456789', '986742310']}>();
   const [text, onChangeText] = useState('Hello: This is Huy');
 
   async function _handlePressButtonAsync(){
