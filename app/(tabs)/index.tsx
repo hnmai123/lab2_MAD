@@ -1,5 +1,7 @@
-import { Image, StyleSheet, View, Button, Alert } from 'react-native';
+import { TextInput, StyleSheet, View, Button, Alert } from 'react-native';
 import * as SMS from 'expo-sms';
+import {Link} from 'expo-router';
+import {useState} from 'react';
 
 export default function HomeScreen() {
   
@@ -15,11 +17,12 @@ export default function HomeScreen() {
   }
 
   const id = ['0123456789', '9876543210'];
-  const message = 'My sample message';
+  const [text, onChangeText] = useState('Hello: This is Huy');
+
   async function _handlePressButtonAsync(){
     const {result} = await SMS.sendSMSAsync(
         id,
-        message,
+        text,
         {
           attachments: {
             uri: 'https://www.latrobe.edu.au/__data/assets/file/0010/796393/logo-white.svg',
@@ -43,7 +46,14 @@ export default function HomeScreen() {
           title = "Send SMS"
           onPress = {() => asktoSend()}
         />
+        <Link href = "./contacts" asChild>
+          <Button title = "Contacts"></Button>
+        </Link>
       </View>
+      <TextInput 
+        onChangeText={onChangeText}
+        value={text}
+      />
     </View>
   );
 }
